@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "publish-tester"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Kanishkan Kukarajah <kanishkan77@gmail.com>"]
 
