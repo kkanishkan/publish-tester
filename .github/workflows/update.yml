@@ -1,0 +1,30 @@
+name: Publish Release
+on: 
+  push:
+    tags:
+      - 'v*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: Install poetry
+        run: |
+          pip install poetry
+      - name: Add testpypi repo
+        run: |
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+      - name: Build package
+        run: |
+          poetry build
+      - name: Publish
+        env:
+          username: __token__
+          password: '${{ secrets.TESTPYPI_PASSWORD }}'
+        run: |
+          poetry publish -r testpypi
