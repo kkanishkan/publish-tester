@@ -21,10 +21,10 @@ jobs:
           poetry config repositories.testpypi https://test.pypi.org/legacy/
       - name: Add token to poetry config 
         run: |
-          poetry config token.testpypi '${{ secrets.TESTPYPI_PASSWORD}}'
+          poetry config pypi-token.pypi '${{ secrets.TESTPYPI_PASSWORD}}'
       - name: Build package
         run: |
           poetry build
       - name: Publish
         run: |
-          poetry publish -r testpypi
+          poetry publish -r testpypi pypi
