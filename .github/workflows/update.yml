@@ -19,12 +19,12 @@ jobs:
       - name: Add testpypi repo
         run: |
           poetry config repositories.testpypi https://test.pypi.org/legacy/
+      - name: Add token to poetry config 
+        run: |
+          poetry config token.testpypi '${{ secrets.TESTPYPI_PASSWORD}}'
       - name: Build package
         run: |
           poetry build
       - name: Publish
-        env:
-          username: '${{ secrets.TESTPYPI_USERNAME }}'
-          password: '${{ secrets.TESTPYPI_PASSWORDACTUAL }}'
         run: |
           poetry publish -r testpypi
